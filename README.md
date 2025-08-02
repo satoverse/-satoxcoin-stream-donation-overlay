@@ -5,9 +5,14 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/satoverse/satoxcoin-stream-donation-overlay)
 [![OBS Studio](https://img.shields.io/badge/OBS%20Studio-Supported-orange.svg)](https://obsproject.com/)
 [![Streamlabs](https://img.shields.io/badge/Streamlabs%20OBS-Supported-purple.svg)](https://streamlabs.com/)
-[![Satoxcoin](https://img.shields.io/badge/Satoxcoin-Compatible-yellow.svg)](https://satoxcoin.org/)
 
 A production-ready donation overlay system for receiving Satoxcoin donations during live streams with real-time alerts, animations, and sound effects.
+
+## 🖼️ Demo Preview
+
+![Satoxcoin Donation Alert Demo](images/demo-screenshot.png)
+
+*Interactive demo showing the donation overlay in action. Features customizable logo sizes, accent colors, and realistic Satoxcoin addresses.*
 
 ## 📋 Table of Contents
 - [🚀 Quick Start](#-quick-start)
@@ -125,6 +130,8 @@ The demo page provides a complete preview of how your donation alerts will look 
 - **🎮 Trigger Demo Alert** - Simulates random donation alerts with different amounts
 - **📏 Change Logo Size** - Test 4 different logo sizes (Small, Medium, Large, Extra Large)
 - **🎨 Change Accent Color** - Try 5 different color themes (Purple, Pink, Cyan, Rose, Dark Purple)
+- **🖼️ Visual Preview** - See exactly how your OBS overlay will look
+- **🎵 Sound Effects** - Test audio with coin.mp3 sound file
 
 ### ⌨️ **Keyboard Shortcuts**
 - **Spacebar** - Trigger demo alert
