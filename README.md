@@ -312,5 +312,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for the Satoxcoin community**
 
-[![Satoxcoin](https://img.shields.io/badge/Satoxcoin-Community-yellow.svg)](https://satoxcoin.org/)
+[![Satoxcoin](https://img.shields.io/badge/Satoxcoin-Community-yellow.svg)](https://discord.com/invite/GFZYFuuHVq)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://github.com/satoverse/satoxcoin-stream-donation-overlay)
