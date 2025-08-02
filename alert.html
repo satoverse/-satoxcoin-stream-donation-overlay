@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Satoxcoin Donation Alert</title>
+  <style>
+    /* ========================================
+       CUSTOMIZATION GUIDE
+       ========================================
+       
+       To change the logo size, modify these CSS variables:
+       --logo-width: 80px;     (default: 80px)
+       --logo-height: 80px;    (default: 80px)
+       
+       Other customizable properties:
+       --text-color: #fff;     (text color)
+       --font-size: 36px;      (text size)
+       --fade-duration: 7s;    (how long alert shows)
+    */
+    
+    :root {
+      --logo-width: 80px;
+      --logo-height: 80px;
+      --logo-size: 80px;
+      --text-color: #fff;
+      --font-size: 36px;
+      --fade-duration: 7s;
+      --alert-duration: 7s;
+      --primary-color: #7f5af0;
+      --secondary-color: #ff2fa0;
+      --overlay-width: 400px;
+      --overlay-height: 200px;
+      --background-color: rgba(45,0,77,0.7);
+      --border-radius: 24px;
+      --padding: 24px 48px;
+      --box-shadow: 0 8px 32px #7f5af055;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #container {
+      animation: fadeout var(--fade-duration) ease-in-out forwards;
+      display: inline-block;
+      margin: 40px;
+      background: rgba(45,0,77,0.7);
+      border-radius: 24px;
+      padding: 24px 48px;
+      box-shadow: 0 8px 32px #7f5af055;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes fadeout {
+      0% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    #satox-logo {
+      width: var(--logo-width);
+      height: var(--logo-height);
+      display: block;
+      margin: 0 auto 16px auto;
+      filter: drop-shadow(0 0 16px #4a1a5fcc);
+      transition: transform 0.2s;
+      animation: logo-bounce 1s ease infinite;
+    }
+
+    @keyframes logo-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px) scale(1.08); }
+    }
+
+    #alert {
+      color: var(--text-color);
+      font-size: var(--font-size);
+      font-weight: 600;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px #7f5af0cc;
+      text-align: center;
+      margin: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img id="satox-logo" src="satox-logo.png" alt="Satoverse Logo" />
+    <div id="alert">S8f3x2a1... donated 150.00 SATOX!</div>
+  </div>
+
+  <script>
+    // Function to read alert.txt file and update the overlay
+    async function readAlertFile() {
+      try {
+        const response = await fetch('alert.txt');
+        if (response.ok) {
+          const alertText = await response.text();
+          if (alertText.trim()) {
+            // Parse the alert text (format: "S8f3x2a1... donated 150.00 SATOX!")
+            const match = alertText.match(/([A-Za-z0-9]{4,8})\.\.\. donated ([\d.]+) SATOX!/);
+            if (match) {
+              const address = match[1];
+              const amount = match[2];
+              updateAlert(address, amount);
+            }
+          }
+        }
+      } catch (error) {
+        console.log('Could not read alert.txt:', error);
+      }
+    }
+
+    // Function to update the alert with donation information
+    function updateAlert(address, amount) {
+      const alertElement = document.getElementById('alert');
+      const shortAddress = address.substring(0, 4) + '****';
+      alertElement.textContent = `${shortAddress} donated ${amount} SATOX!`;
+      
+      // Play sound effect with enhanced functionality
+      try {
+        const audio = new Audio('coin.mp3');
+        audio.volume = 0.5; // Good volume for OBS
+        audio.currentTime = 0; // Reset to beginning
+        audio.play().then(() => {
+          console.log('🔊 Donation sound played successfully');
+        }).catch(e => {
+          console.log('Audio play failed:', e);
+          // Enhanced visual feedback if sound fails
+          const logo = document.getElementById('satox-logo');
+          if (logo) {
+            logo.style.animation = 'logo-bounce 0.5s ease 3';
+          }
+        });
+      } catch (e) {
+        console.log('Audio not available:', e);
+        // Enhanced visual feedback when sound is not available
+        const logo = document.getElementById('satox-logo');
+        if (logo) {
+          logo.style.animation = 'logo-bounce 0.5s ease 3';
+        }
+      }
+      
+      // Show the alert
+      const container = document.getElementById('container');
+      container.classList.remove('hidden');
+      
+      // Reset animation
+      container.style.animation = 'none';
+      container.offsetHeight; // Trigger reflow
+      container.style.animation = null;
+    }
+
+    // Function to hide the alert
+    function hideAlert() {
+      const container = document.getElementById('container');
+      container.classList.add('hidden');
+    }
+
+    // Check for new alerts every 2 seconds
+    setInterval(readAlertFile, 2000);
+
+    // Initial check on page load
+    readAlertFile();
+
+    // Listen for messages from the wallet monitor (alternative method)
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'donation') {
+        updateAlert(event.data.address, event.data.amount);
+      }
+    });
+
+    // For testing purposes - you can call updateAlert directly
+    // updateAlert('S8f3x2a1b2c3d4e5f6', '150.00');
+  </script>
+</body>
+</html>

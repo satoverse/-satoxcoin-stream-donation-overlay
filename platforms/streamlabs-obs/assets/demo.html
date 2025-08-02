@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Satoxcoin Donation Alert - Demo</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #12002a 0%, #1a093b 60%, #2d004d 100%);
+      color: #fff;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 36px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .demo-container {
+      max-width: 800px;
+      padding: 40px;
+    }
+
+    .demo-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .demo-logo {
+      width: 72px;
+      height: 72px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .demo-description {
+      font-size: 24px;
+      margin-bottom: 48px;
+      opacity: 0.85;
+    }
+
+    .overlay-preview {
+      border: 3px solid #7f5af0;
+      border-radius: 20px;
+      padding: 40px;
+      margin: 20px;
+      background: linear-gradient(120deg, #2d004d 60%, #7f5af0 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px #7f5af055;
+    }
+
+    .overlay-preview::before {
+      content: "OBS Overlay Preview";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: #ff2fa0;
+      opacity: 0.7;
+    }
+
+    /* ========================================
+       CUSTOMIZATION GUIDE
+       ========================================
+       
+       To change the GIF size, modify these CSS variables:
+       --logo-width: 80px;     (default: 80px)
+       --logo-height: 80px;    (default: 80px)
+       
+       Other customizable properties:
+       --text-color: #fff;  (text color)
+       --font-size: 36px;      (text size)
+       --fade-duration: 7s;    (how long alert shows)
+    */
+    
+    :root {
+      --logo-width: 80px;
+      --logo-height: 80px;
+      --text-color: #fff;
+      --font-size: 36px;
+      --fade-duration: 7s;
+    }
+
+    #container {
+      animation: fadeout var(--fade-duration) ease-in-out forwards;
+      display: inline-block;
+      margin-top: 40px;
+      background: rgba(45,0,77,0.7);
+      border-radius: 24px;
+      padding: 24px 48px;
+      box-shadow: 0 8px 32px #7f5af055;
+    }
+    @keyframes fadeout {
+      0% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    #satox-logo {
+      width: var(--logo-width);
+      height: var(--logo-height);
+      display: block;
+      margin: 0 auto 16px auto;
+      filter: drop-shadow(0 0 16px #4a1a5fcc);
+      transition: transform 0.2s;
+      animation: logo-bounce 1s ease infinite;
+    }
+    @keyframes logo-bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px) scale(1.08); }
+    }
+    #alert {
+      color: #fff;
+      font-size: var(--font-size);
+      font-weight: 600;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 16px #7f5af0cc;
+    }
+    .hidden {
+      display: none;
+    }
+
+    .demo-buttons {
+      margin-top: 40px;
+    }
+
+    .demo-button {
+      background: linear-gradient(90deg, #7f5af0 0%, #ff2fa0 100%);
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 2px 12px 0 rgba(127,90,240,0.18), 0 1.5px 6px 0 rgba(255,47,160,0.12);
+      font-weight: 600;
+    }
+
+    .demo-button:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px 0 rgba(127,90,240,0.22), 0 2px 10px 0 rgba(255,47,160,0.16);
+    }
+
+    .features-list {
+      text-align: left;
+      margin-top: 40px;
+      font-size: 20px;
+    }
+
+    .features-list h3 {
+      color: #ff2fa0;
+      margin-bottom: 20px;
+    }
+
+    .features-list ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(127, 90, 240, 0.08);
+      border-radius: 10px;
+      border-left: 4px solid #ff2fa0;
+    }
+
+    .features-list li::before {
+      content: "✨ ";
+      color: #ff2fa0;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="demo-title">
+      <span>Satoxcoin Donation Alert</span>
+      <img class="demo-logo" id="satox-logo-svg" src="satox-logo.png" alt="Satoverse Logo" />
+    </div>
+    <p class="demo-description">See how your OBS overlay will look when donations come in!</p>
+
+    <div class="overlay-preview">
+      <div id="container">
+        <img id="satox-logo" src="satox-logo.png" alt="Satoverse Logo" />
+        <div id="alert">S8f3**** donated 150.00 SATOX!</div>
+      </div>
+    </div>
+
+    <div class="demo-buttons">
+      <button class="demo-button" onclick="triggerDemo()">🎮 Trigger Demo Alert</button>
+      <button class="demo-button" onclick="changeSize()" id="size-button">📏 Change Logo Size</button>
+      <button class="demo-button" onclick="changeColor()" id="color-button">🎨 Change Accent Color</button>
+    </div>
+    
+    <div style="margin-top: 20px; text-align: center; font-size: 16px; opacity: 0.8;">
+      <div>💡 <strong>Keyboard Shortcuts:</strong> Spacebar (Alert) | S (Size) | C (Color)</div>
+      <div id="current-settings" style="margin-top: 10px; font-size: 14px; opacity: 0.7;">
+        Current: Medium Logo | Purple-Dark Purple Theme
+      </div>
+    </div>
+
+    <div class="features-list">
+      <h3>🎯 Features:</h3>
+      <ul>
+        <li><strong>Animated Logo:</strong> Bouncing Satoverse logo animation</li>
+        <li><strong>Sound Effect:</strong> Coin sound plays on donation</li>
+        <li><strong>Donor Info:</strong> Shows donor address and amount</li>
+        <li><strong>Auto-Fade:</strong> Disappears after 7 seconds</li>
+        <li><strong>Customizable:</strong> Easy to change colors, sizes, and timing</li>
+        <li><strong>Real-time:</strong> Monitors Satox Core wallet for donations</li>
+        <li><strong>Secure:</strong> Uses dedicated donation wallet</li>
+      </ul>
+    </div>
+  </div>
+  <footer style="margin-top: 60px; margin-bottom 20px; color: #ffffff; font-size: 18px; opacity: 0.85; text-align: center; letter-spacing: 1px;">
+    &copy; Satoxcoin | Satoxcoin Twitch Alert Demo
+  </footer>
+
+  <script>
+    const alertBox = document.getElementById("alert");
+    const container = document.getElementById("container");
+    const logo = document.getElementById("satox-logo");
+    let currentSizeIndex = 1; // Start with 80px
+    let currentColorIndex = 0;
+
+    function triggerDemo() {
+      // Reset animation
+      container.style.animation = 'none';
+      container.offsetHeight; // Trigger reflow
+      container.style.animation = null;
+      
+      // Generate random donation amount
+      const amounts = [25.00, 50.00, 75.50, 100.00, 150.00, 200.00, 250.00, 500.00];
+      const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
+      
+          // Generate random address prefix (all Satoxcoin addresses start with S)
+    const prefixes = ['S8f3', 'S7b9', 'S1e8', 'S5m2', 'S9y4', 'S3n7', 'S6q1', 'S2t8'];
+      const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+      
+      const message = `${randomPrefix}**** donated ${randomAmount.toFixed(2)} SATOX!`;
+      alertBox.innerText = message;
+      
+      // Show the container
+      container.classList.remove("hidden");
+      
+      // Play sound effect with enhanced functionality
+      try {
+        const audio = new Audio('coin.mp3');
+        audio.volume = 0.4; // Slightly louder for demo
+        audio.currentTime = 0; // Reset to beginning
+        audio.play().then(() => {
+          console.log('🔊 Sound played successfully');
+        }).catch(e => {
+          console.log('Audio play failed:', e);
+          // Show visual feedback if sound fails
+          logo.style.animation = 'logo-bounce 0.5s ease 3';
+        });
+      } catch (e) {
+        console.log('Audio not available:', e);
+        // Enhanced visual feedback when sound is not available
+        logo.style.animation = 'logo-bounce 0.5s ease 3';
+      }
+      
+      // Add button feedback
+      const button = event.target;
+      if (button) {
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          button.style.transform = '';
+        }, 150);
+      }
+      
+      console.log('🎮 Demo alert triggered:', message);
+    }
+
+    function playCoinSound() {
+      try {
+        const audio = new Audio('coin.mp3');
+        audio.volume = 0.5;
+        audio.currentTime = 0;
+        audio.play().then(() => {
+          console.log('🔊 Coin sound played successfully');
+        }).catch(e => {
+          console.log('Audio play failed:', e);
+        });
+      } catch (e) {
+        console.log('Audio not available:', e);
+      }
+    }
+
+    function showDonationAlert(address, amount) {
+      const alertElement = document.getElementById('alert');
+      const shortAddress = address.substring(0, 4) + '****';
+      alertElement.textContent = `${shortAddress} donated ${amount} SATOX!`;
+      
+      // Show the container
+      const container = document.getElementById('container');
+      container.classList.remove('hidden');
+      
+      // Play sound
+      playCoinSound();
+      
+      // Reset animation
+      container.style.animation = 'none';
+      container.offsetHeight; // Trigger reflow
+      container.style.animation = null;
+    }
+
+    function testDonation() {
+      showDonationAlert('S8f3x2a1b2c3d4e5f6g7h8i9j0k1l2m3n4', '150.00');
+    }
+
+    function changeSize() {
+      const sizes = [
+        { width: "60px", height: "60px", name: "Small" },
+        { width: "80px", height: "80px", name: "Medium" },
+        { width: "100px", height: "100px", name: "Large" },
+        { width: "120px", height: "120px", name: "Extra Large" }
+      ];
+      
+      currentSizeIndex = (currentSizeIndex + 1) % sizes.length;
+      const newSize = sizes[currentSizeIndex];
+      
+      document.documentElement.style.setProperty('--logo-width', newSize.width);
+      document.documentElement.style.setProperty('--logo-height', newSize.height);
+      
+      // Add button feedback
+      const button = event.target;
+      if (button) {
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          button.style.transform = '';
+        }, 150);
+      }
+      
+      console.log('📏 Logo size changed to:', newSize.name, `(${newSize.width})`);
+      
+      // Update settings display
+      updateSettingsDisplay();
+    }
+
+    function changeColor() {
+      const gradients = [
+        { border: "#7f5af0", accent: "#4a1a5f", grad1: "#7f5af0", grad2: "#4a1a5f", name: "Purple-Dark Purple" },
+        { border: "#ff2fa0", accent: "#4a1a5f", grad1: "#ff2fa0", grad2: "#4a1a5f", name: "Pink-Dark Purple" },
+        { border: "#00ffd0", accent: "#4a1a5f", grad1: "#00ffd0", grad2: "#4a1a5f", name: "Cyan-Dark Purple" },
+        { border: "#ff6ac1", accent: "#4a1a5f", grad1: "#ff6ac1", grad2: "#4a1a5f", name: "Rose-Dark Purple" },
+        { border: "#692a7f", accent: "#4a1a5f", grad1: "#692a7f", grad2: "#4a1a5f", name: "Dark Purple-Dark Purple" }
+      ];
+      
+      currentColorIndex = (currentColorIndex + 1) % gradients.length;
+      const newColor = gradients[currentColorIndex];
+      
+      // Update preview border and background
+      const preview = document.querySelector('.overlay-preview');
+      preview.style.borderColor = newColor.border;
+      preview.style.background = `linear-gradient(120deg, #2d004d 60%, ${newColor.grad1} 100%)`;
+      
+      // Update features title color
+      const featuresTitle = document.querySelector('.features-list h3');
+      featuresTitle.style.color = newColor.accent;
+      
+      // Update feature list items
+      document.querySelectorAll('.features-list li').forEach(li => {
+        li.style.borderLeftColor = newColor.accent;
+        li.style.background = `rgba(127,90,240,0.08)`;
+      });
+      
+      // Update logo glow effects
+      const logo = document.getElementById('satox-logo');
+      const demoLogo = document.getElementById('satox-logo-svg');
+      const glowFilter = `drop-shadow(0 0 16px ${newColor.accent}cc)`;
+      
+      if (logo) logo.style.filter = glowFilter;
+      if (demoLogo) demoLogo.style.filter = glowFilter;
+      
+      // Add button feedback
+      const button = event.target;
+      if (button) {
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          button.style.transform = '';
+        }, 150);
+      }
+      
+      console.log('🎨 Color theme changed to:', newColor.name);
+      
+      // Update settings display
+      updateSettingsDisplay();
+    }
+
+    // Add keyboard shortcuts
+    document.addEventListener('keydown', function(event) {
+      switch(event.key) {
+        case ' ': // Spacebar
+          event.preventDefault();
+          triggerDemo();
+          break;
+        case 's': // S key
+        case 'S':
+          changeSize();
+          break;
+        case 'c': // C key
+        case 'C':
+          changeColor();
+          break;
+      }
+    });
+
+    // Add button hover effects
+    document.querySelectorAll('.demo-button').forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px) scale(1.04)';
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+      });
+    });
+
+    // Function to update settings display
+    function updateSettingsDisplay() {
+      const sizes = ['Small', 'Medium', 'Large', 'Extra Large'];
+      const colors = ['Purple-Dark Purple', 'Pink-Dark Purple', 'Cyan-Dark Purple', 'Rose-Dark Purple', 'Dark Purple-Dark Purple'];
+      
+      const currentSize = sizes[currentSizeIndex];
+      const currentColor = colors[currentColorIndex];
+      
+      const settingsDisplay = document.getElementById('current-settings');
+      if (settingsDisplay) {
+        settingsDisplay.textContent = `Current: ${currentSize} Logo | ${currentColor} Theme`;
+      }
+    }
+
+    // Function to update the donation amount (stub for test compatibility)
+    function updateDonationAmount(amount) {
+      // This is a stub for test compatibility
+      // In a real implementation, this would update the alert with a new amount
+      console.log('updateDonationAmount called with:', amount);
+    }
+
+    // Auto-trigger demo on page load
+    setTimeout(triggerDemo, 1000);
+    
+    // Initialize settings display
+    updateSettingsDisplay();
+    
+    // Add instructions
+    console.log('🎮 Demo Controls:');
+    console.log('- Spacebar: Trigger demo alert');
+    console.log('- S key: Change logo size');
+    console.log('- C key: Change color theme');
+    console.log('- Click buttons for same functions');
+  </script>
+</body>
+</html> 

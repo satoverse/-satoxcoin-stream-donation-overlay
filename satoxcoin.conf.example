@@ -1,0 +1,37 @@
+# Satox Core Configuration Example
+# Copy this file to your Satox data directory and rename to satoxcoin.conf
+# Then modify the values below with your actual credentials
+
+# Enable RPC server
+server=1
+
+# RPC authentication
+rpcuser=your_rpc_username_here
+rpcpassword=your_secure_rpc_password_here
+
+# RPC access control
+rpcallowip=127.0.0.1
+rpcport=7777
+
+# Additional security settings (recommended)
+rpcbind=127.0.0.1
+rpcbindaddr=127.0.0.1
+
+# Network settings
+listen=1
+port=60777
+
+# Wallet settings
+wallet=wallet.dat
+
+# Logging
+debug=rpc
+logips=1
+
+# Performance
+dbcache=450
+maxconnections=125
+
+# Security
+disablewallet=0
+txindex=1 
