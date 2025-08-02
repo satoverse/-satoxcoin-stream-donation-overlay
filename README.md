@@ -1,6 +1,22 @@
 # 🪙 Satoxcoin Stream Donation Overlay
 
+[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/satoverse/satoxcoin-stream-donation-overlay)
+[![OBS Studio](https://img.shields.io/badge/OBS%20Studio-Supported-orange.svg)](https://obsproject.com/)
+[![Streamlabs](https://img.shields.io/badge/Streamlabs%20OBS-Supported-purple.svg)](https://streamlabs.com/)
+[![Satoxcoin](https://img.shields.io/badge/Satoxcoin-Compatible-yellow.svg)](https://satoxcoin.org/)
+
 A production-ready donation overlay system for receiving Satoxcoin donations during live streams with real-time alerts, animations, and sound effects.
+
+## 📋 Table of Contents
+- [🚀 Quick Start](#-quick-start)
+- [🎮 Interactive Demo Preview](#-interactive-demo-preview)
+- [🪟 Windows Setup](#-windows-setup)
+- [📚 Documentation](#-documentation)
+- [🛠️ Quick Troubleshooting](#️-quick-troubleshooting)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ## 🚀 Quick Start
 
@@ -249,3 +265,45 @@ For detailed guides and troubleshooting, see the **[docs/](docs/)** folder:
 **Port already in use**
 ```
 ```
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+### 🐛 Reporting Issues
+- Use the [GitHub Issues](https://github.com/satoverse/satoxcoin-stream-donation-overlay/issues) page
+- Include your operating system and Python version
+- Provide error messages and logs
+
+### 💡 Suggesting Features
+- Open a [Feature Request](https://github.com/satoverse/satoxcoin-stream-donation-overlay/issues/new) issue
+- Describe the use case and benefits
+- Include mockups if possible
+
+### �� Code Contributions
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+### 📋 Development Setup
+```bash
+# Clone and setup development environment
+git clone https://github.com/satoverse/satoxcoin-stream-donation-overlay.git
+cd satoxcoin-stream-donation-overlay
+pip install -r requirements.txt
+
+# Run tests
+python test_all.py
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Made with ❤️ for the Satoxcoin community**
+
+[![Satoxcoin](https://img.shields.io/badge/Satoxcoin-Community-yellow.svg)](https://satoxcoin.org/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://github.com/satoverse/satoxcoin-stream-donation-overlay)
